@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Test avec Ant" default="convert" basedir=".">
+		
+	    <property name="InputPath" value="CkInput.html"/>
+		<property name="OutputPath" value="outZip.hdoc"/>
+        <!-- comment this line if you use the website -->
+        <!--<target name="init">-->
+        <!-- comment this line if you use the command line tool -->
+        <target name="convert">
+
+        <mkdir dir="java/out"/>
+        <java
+            fork="true"
+            failonerror="true" 
+            jar="java/XMLParser1.jar"
+        >
+            <arg value="${InputPath}"/>
+            <arg value="java/out/content.xml"/>
+       </java>
+
+        <mkdir dir="xslt"/>
+        <xslt in="java/out/content.xml" out="xslt/out/content.xml"
+            style="xslt/model.xsl">
+            <outputproperty name="method" value="xml"/>
+            <outputproperty name="standalone" value="yes"/>
+            <outputproperty name="encoding" value="UTF-8"/>
+            <outputproperty name="indent" value="yes"/>
+        </xslt>
+
+        <!--construit la structure hoc-->
+        <mkdir dir="out/META-INF"/>
+        <mkdir dir="out/OPS"/>
+        <touch file="out/mimetype"/>
+        <!--<touch file="out/META-INF/container.xml" />-->
+        <echo message="application/x-hdoc+zip" file="out/mimetype" />
+
+        <!-- copie la sortie du XSLT dans le dossier out/build -->
+        <copy file="xslt/out/content.xml" tofile="out/content.xml"/>
+
+      <!--  <echoxml file="out/META-INF/container.xml">
+            <?oxygen RNGSchema="http://scenari.utc.fr/hdoc/schemas/container/hdoc1-container.rng" type="xml" ?>
+			<container version="1.0" xmlns="urn:utc.fr:ics:hdoc:container">
+                <rootfiles>
+                    <rootfile full-path="out/content.xml" media-type="text/xml" />
+                </rootfiles>
+            </container>
+        </echoxml>
+       -->
+        
+		<xslt in="container.xml" out="out/META-INF/container.xml"
+            style="xslt/container.xsl">
+        </xslt>
+        <!-- zip le dossier build et en fait un .hdoc -->
+        <zip destfile="${OutputPath}" basedir="out" update="true"/>
+        
+    </target> 
+</project>

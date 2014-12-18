@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="hdoc_to_opale" basedir="." default="convert">
+ 	<property file="global.properties"/>
+
+	<taskdef name="jing" classname="com.thaiopensource.relaxng.util.JingTask">
+		<classpath>
+			<pathelement location="lib/jing.jar"/>
+		</classpath>
+	</taskdef>
+	
+	<target name="convert">
+		<!-- This is the main target : it is called whether by the project (as the default target) or by the user/converter
+		website, if specified in the command line. Basically, this target consists in several targets/ant buildfiles calls. -->
+		<antcall target="CleanDirectory"/>
+		<mkdir dir="${tmpdir}"/>
+
+		<antcall target="UnzipHdocFile"/>
+		<antcall target="validateInput" />
+
+		<antcall target="FindContentFiles"/>
+		<ant antfile="${tmpdir}/generateContentPath.xml"/>
+
+		<antcall target="ValidateOutput"/>
+		<antcall target="DivideOutput"/>
+
+		<antcall target="ZipOutput"/>
+		<antcall target="ZipDividedOutput"/>
+
+		<antcall target="CleanDirectory"/>
+    </target>
+	
+	<target name="CleanDirectory">
+		<delete dir="${tmpdir}"/>
+	</target>
+	
+	<target name="UnzipHdocFile">
+		<!-- Unzip the input hdoc file. Decompressed folder is named "decompressedHdoc" : this name is the only one which
+		refers to the hdoc file furthermore in this project. -->
+		<unzip src="${InputPath}" dest="${tmpdir}/decompressedHdoc"/>
+		<chmod dir="${tmpdir}/decompressedHdoc" perm="777"/>
+	</target>
+	
+	<target name="FindContentFiles">
+		<!-- Finds the absolute path of container.xml and applies transformation0.xsl on it.-->
+		<first id="first">
+		    <fileset
+		    	dir="${tmpdir}/decompressedHdoc/META-INF"
+		    	includes="**/container.xml"
+		    />
+		</first>
+		<xslt
+			in="${toString:first}"
+			out="${tmpdir}/generateContentPath.xml"
+			style="transformation0.xsl"
+			processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison"
+		/>
+		<chmod file="${tmpdir}/generateContentPath.xml" perm="777"/>
+	</target>
+	
+	<target name="ZipOutput">
+		<copy file=".wspmeta" todir="${tmpdir}/decompressedOpale"/>
+		<mkdir dir="${tmpdir}/decompressedOpale/res"/>
+		<ant antfile="${tmpdir}/moveRessourceFiles.xml"/>
+		<zip basedir="${tmpdir}/decompressedOpale" destfile="${OutputPath}" encoding="UTF-8"/>
+	</target>
+
+	<target name="ZipDividedOutput">
+		<copy file=".wspmeta" todir="${tmpdir}/decompressedOpaleDivided"/>
+		<copy todir="${tmpdir}/decompressedOpaleDivided/res" >  
+	        <fileset dir="${tmpdir}/decompressedOpale/res" includes="**"/>  
+	 	</copy>
+		<zip basedir="${tmpdir}/decompressedOpaleDivided" destfile="${OutputPathDivided}" encoding="UTF-8"/>
+	</target>
+
+	<!-- Validating the XML container file -->
+	<target name="validateInput">	
+		<jing file="${tmpdir}/decompressedHdoc/META-INF/container.xml" rngfile="schema/hdoc1-container.rng"></jing>
+	</target>
+
+	<!-- Validating the XML output -->
+	<target name="ValidateOutput">
+		<jing file="${tmpdir}/decompressedOpale/main.xml" rngfile="schema/op_ue.rng"></jing>		
+	</target>
+
+	<target name="DivideOutput">
+		<mkdir dir="${tmpdir}/decompressedOpaleDivided"/>
+
+		<!-- Adding IDS to the general output file -->
+		<xslt
+			in="${tmpdir}/decompressedOpale/main.xml"
+			out="${tmpdir}/outputWithCourseUcIds.xml"
+			style="addCourseUcIds.xsl"
+			processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison"
+		/>
+
+		<!-- Generating the root file (with refs to other files) -->
+		<xslt
+			in="${tmpdir}/outputWithCourseUcIds.xml"
+			out="${tmpdir}/decompressedOpaleDivided/main.xml"
+			style="addCourseUcReferences.xsl"
+			processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison"
+		/>
+
+		<!-- Generating the ANT file that will copy the files -->
+		<xslt
+			in="${tmpdir}/outputWithCourseUcIds.xml"
+			out="${tmpdir}/exportUnits.ant"
+			style="prepareCourseUcCopies.xsl"
+			processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison"
+		/>
+
+		<!-- Executing that ANT file -->
+		<ant antfile="${tmpdir}/exportUnits.ant"/>
+	</target>
+</project>
