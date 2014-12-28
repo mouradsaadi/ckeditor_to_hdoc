@@ -15,7 +15,7 @@
 		<mkdir dir="${tmpdir}"/>
 
 		<antcall target="UnzipHdocFile"/>
-		<antcall target="validateInput" />
+		<antcall target="ValidateInput" />
 
 		<antcall target="FindContentFiles"/>
 		<ant antfile="${tmpdir}/generateContentPath.xml"/>
@@ -69,11 +69,14 @@
 		<copy todir="${tmpdir}/decompressedOpaleDivided/res" >  
 	        <fileset dir="${tmpdir}/decompressedOpale/res" includes="**"/>  
 	 	</copy>
+		<copy todir="${tmpdir}/decompressedOpaleDivided/references" >  
+	        <fileset dir="${tmpdir}/decompressedOpale/references" includes="**"/>  
+	 	</copy>
 		<zip basedir="${tmpdir}/decompressedOpaleDivided" destfile="${OutputPathDivided}" encoding="UTF-8"/>
 	</target>
 
 	<!-- Validating the XML container file -->
-	<target name="validateInput">	
+	<target name="ValidateInput">	
 		<jing file="${tmpdir}/decompressedHdoc/META-INF/container.xml" rngfile="schema/hdoc1-container.rng"></jing>
 	</target>
 

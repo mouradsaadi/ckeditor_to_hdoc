@@ -8,10 +8,10 @@
     <xsl:template match="root">
         <html xmlns="http://www.utc.fr/ics/hdoc/xhtml">
             <head>
-                <title>Test</title>
+                <title>CKeditor Text</title>
                 <meta charset="utf-8"/>
                 <meta name="generator" content="HdocConverter/Optim1.2"/>
-                <meta name="author" content="Stéphane Crozat"/>
+                <meta name="author" content="Ckeditor"/>
             </head>
             <body>
                 <xsl:copy-of select="./*"/>

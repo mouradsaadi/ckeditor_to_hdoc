@@ -7,9 +7,12 @@
         <!--<target name="init">-->
         <!-- comment this line if you use the command line tool -->
         <target name="convert">
-
+	
         <mkdir dir="java/out"/>
-        <java
+		<mkdir dir="java/out"/>
+		<delete dir="out"/>
+        <mkdir dir="out/res"/>
+		<java
             fork="true"
             failonerror="true" 
             jar="java/XMLParser1.jar"

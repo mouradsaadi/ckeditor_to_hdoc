@@ -55,6 +55,7 @@
                             <value>HdocConverter/OpenDocumentText</value>
                             <value>HdocConverter/LaTeX</value>
                             <value>HdocConverter/OPML</value>
+                            <value>HdocConverter/DITA</value>                            
                         </choice>
                     </attribute>
                 </element>
@@ -255,6 +256,12 @@
                     <attribute name="href">
                         <data type="anyURI"/>
                     </attribute>
+                    <optional>
+                        <!-- Biblio reference management -->                       
+                        <attribute name="data-hdoc-type">
+                            <value>bibtexml</value>
+                        </attribute>
+                    </optional>
                     <ref name="Inline"/>
                 </element>
                 <element name="span">

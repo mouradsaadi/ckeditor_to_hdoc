@@ -1,115 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <html xmlns="http://www.utc.fr/ics/hdoc/xhtml">
 <head>
-<title>Test</title>
+<title>CKeditor Text</title>
 <meta charset="utf-8"/>
 <meta name="generator" content="HdocConverter/Optim1.2"/>
-<meta name="author" content="Stéphane Crozat"/>
+<meta name="author" content="Ckeditor"/>
 </head>
 <body>
+<section data-hdoc-type="unit-of-content">
+<header>
+<h1>RDF :</h1>
+</header>
+
+
+
 <section>
 <header>
-<h1> Apollo 11</h1>
+<h1>Définition :</h1>
 </header>
+
+
+
+
 <div>
-
-
-<p>Apollo 11 was the spaceflight that landed the first humans, Americans <a href="http://en.wikipedia.org/wiki/Neil_Armstrong">Neil Armstrong</a> and <a href="http://en.wikipedia.org/wiki/Buzz_Aldrin">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>
-
-<p>Armstrong spent about three and a half two and a half hours outside the spacecraft, Aldrin slightly less; and together they collected 47.5 pounds (21.5kg) of lunar material for return to Earth. A third member of the mission, <a href="http://en.wikipedia.org/wiki/Michael_Collins_(astronaut)">Michael Collins</a>, piloted the <a href="http://en.wikipedia.org/wiki/Apollo_Command/Service_Module">command</a> spacecraft alone in lunar orbit until Armstrong and Aldrin returned to it for the trip back to Earth.</p>
-
-
-</div>
-<section>
-<header>
-<h1>Broadcasting and quotes </h1>
-</header>
-<div>
-
-
-<p>Broadcast on live TV to a world-wide audience, Armstrong stepped onto the lunar surface and described the event as:</p>
-
-
-<p>One small step for [a] man, one giant leap for mankind.</p>
-
-
-<p>Apollo 11 effectively ended the <a href="http://en.wikipedia.org/wiki/Space_Race">Space Race</a> and fulfilled a national goal proposed in 1961 by the late U.S. President <a href="http://en.wikipedia.org/wiki/John_F._Kennedy">John F. Kennedy</a> in a speech before the United States Congress:</p>
-
-
-<p>[...] before this decade is out, of landing a man on the Moon and returning him safely to the Earth.</p>
-
+<p>Resource Description Framework est un modèle de graphe étiqueté et orienté qui sert à décrire les ressources web et leurs métadonnées, ce modèle se base sur une forme de triplet. Les triplets contiennent un sujet, objet et un prédicat, sachant que le prédicat est une propriété, alors que les deux autres sont des ressources. RDF est devenu une recommandation de W3C depuis le 10 février 2004. [W3C, 2013]</p>
 
 
 </div>
 </section>
 <section>
 <header>
-<h1>Technical details </h1>
+<h1>Triplet :</h1>
 </header>
+
+
+
+
 <div>
+<p>D’après le W3C, l’explication des triplets est la suivante :</p>
 
-
-<table>
-	<caption>Mission crew</caption>
-	
-		<tr>
-			<td>
-<p>Position</p>
-</td>
-			<td>
-<p>Astronaut</p>
-</td>
-		</tr>
-	
-	
-		<tr>
-			<td>
-<p>Commander</p>
-</td>
-			<td>
-<p>Neil A. Armstrong</p>
-</td>
-		</tr>
-		<tr>
-			<td>
-<p>Command Module Pilot</p>
-</td>
-			<td>
-<p>Michael Collins</p>
-</td>
-		</tr>
-		<tr>
-			<td>
-<p>Lunar Module Pilot</p>
-</td>
-			<td>
-<p>Edwin Buzz E. Aldrin, Jr.</p>
-</td>
-		</tr>
-	
-</table>
-
-<p>Launched by a Saturn V rocket from <a href="http://en.wikipedia.org/wiki/Kennedy_Space_Center">Kennedy Space Center</a> in Merritt Island, Florida on July 16, Apollo 11 was the fifth manned mission of <a href="http://en.wikipedia.org/wiki/NASA">NASA</a>Apollo program. The Apollo spacecraft had three parts:</p>
-
-<ol>
+<ul>
 	<li>
-<p>Command Module with a cabin for the three astronauts which was the only part which landed back on Earth</p>
+<p>Ressource : est tout ce qui peut avoir une URI, comme « http://www.w3schools.com/rdf »</p>
 </li>
 	<li>
-<p>Service Module which supported the Command Module with propulsion, electrical power, oxygen and water</p>
+<p>Propriété : est une ressource qui a un nom, comme « auteur » ou « page d’accueil ».</p>
 </li>
 	<li>
-<p>Lunar Module for landing on the Moon.</p>
+<p>Valeur : est la valeur d’une propriété, tels que « Jean Edouard » ou « http://www.w3schools.com », on note que la valeur de la propriété peut être une autre ressource.</p>
 </li>
-</ol>
+</ul>
 
-<p>After being sent to the Moon by the Saturn upper stage, the astronauts separated the spacecraft from it and travelled for three days until they entered into lunar orbit. Armstrong and Aldrin then moved into the Lunar Module and landed in the <a href="http://en.wikipedia.org/wiki/Mare_Tranquillitatis">Sea of Tranquility</a>. They stayed a total of about 21 and a half hours on the lunar surface. After lifting off in the upper part of the Lunar Module and rejoining Collins in the Command Module, they returned to Earth and landed in the <a href="http://en.wikipedia.org/wiki/Pacific_Ocean">Pacific Ocean</a> on July 24.</p>
-
-
-<p>Source: <a href="http://en.wikipedia.org/wiki/Apollo_11">Wikipedia.org</a>
-</p>
 
 </div>
+</section>
+</section>
+<section data-hdoc-type="unit-of-content">
+<header>
+<h1>Langage d’ontologie :</h1>
+</header>
+
+
+
+<section>
+<header>
+<h1>Définition :</h1>
+</header>
+
+
+
+
+<div>
+<p>Le langage de spécification est l’élément central sur lequel repose l’ontologie.</p>
+
+<p>La plupart de ces langages se basent sur ou sont proches de la logique du premier ordre, et représentent donc les connaissances sous forme d’assertion (sujet, prédicat, objet). Ces langages sont typiquement conçus pour s’abstraire des structures de données et se concentrer sur la sémantique.</p>
+
+
+</div>
+</section>
+<section>
+<header>
+<h1>Les Langages pour l’ontologie:</h1>
+</header>
+
+
+
+<section>
+<header>
+<h1>RDFS :</h1>
+</header>
+
+
+
+
+<div>
+<p>RDFS est un langage extensible de représentation des connaissances, il fournit des éléments de bases pour la définition d’ontologies ou vocabulaires destinés à structurer des ressources RDF. En plus, Le Schéma RDF (RDFS) définit un vocabulaire de ressources RDF qui peut être utilisé pour décrire des propriétés sur d’autres ressources RDF.</p>
+
+<p>RDF propose plusieurs types format de déclaration de ressources : </p>
+
+</div>
+</section>
 </section>
 </section>
 </body>

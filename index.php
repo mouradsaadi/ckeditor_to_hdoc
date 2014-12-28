@@ -20,7 +20,7 @@
 			<div class="btn-group btn-group-justified" role="group" aria-label="...">
 				<section>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-primary btn-lg" onclick="return getOutput();">Convert to HDOC</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="return getOutput();">Convert to HDOC/Opale</button>
 					</div>
 				<section>
 			</div>
